@@ -4,11 +4,13 @@ import products from "../products";
 import { Link } from "react-router-dom";
 import { Row, Col, Image, ListGroup, Card, Button } from "react-bootstrap";
 import Rating from "../components/Rating";
+import PageTitle from "../components/PageTitle";
 const ProductScreen = () => {
   const { id } = useParams();
   const product = products.find((p) => p._id === id);
   return (
     <>
+      <PageTitle title={`${product.name} - Wacom`} />
       <Link className="btn btn-dark my-3" to="/">
         Go Back
       </Link>

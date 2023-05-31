@@ -2,9 +2,11 @@ import React from "react";
 import products from "../products";
 import { Row, Col } from "react-bootstrap";
 import Product from "../components/Product";
+import PageTitle from "../components/PageTitle";
 const HomeScreen = () => {
   return (
     <>
+      <PageTitle title="Wacom" />
       <h1>Latest Products</h1>
       <Row>
         {products.map((product) => (
