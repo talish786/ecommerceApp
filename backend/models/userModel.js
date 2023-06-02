@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const userSchema = Schema(
+const userSchema = mongoose.Schema(
   {
     name: {
       type: String,
@@ -15,7 +15,7 @@ const userSchema = Schema(
       type: String,
       required: true,
     },
-    admin: {
+    isAdmin: {
       type: Boolean,
       required: true,
       default: false,
