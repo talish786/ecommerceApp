@@ -9,6 +9,8 @@ import Login from "./screens/Login";
 import Register from "./screens/Register";
 import Profile from "./screens/Profile";
 import Shipping from "./screens/Shipping";
+import Payment from "./screens/Payment";
+import Order from "./screens/Order";
 function App() {
   return (
     <>
@@ -24,6 +26,8 @@ function App() {
               <Route path="/register/?" element={<Register />} />
               <Route path="/profile/" element={<Profile />} />
               <Route path="/shipping/" element={<Shipping />} />
+              <Route path="/payment/" element={<Payment />} />
+              <Route path="/order/" element={<Order />} />
             </Routes>
           </Container>
         </main>

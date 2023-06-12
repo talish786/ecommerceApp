@@ -7,7 +7,7 @@ import { saveShippingAddress } from "../actions/cartActions";
 import { useNavigate } from "react-router-dom";
 import CheckoutSteps from "../components/CheckoutSteps";
 
-const Login = () => {
+const Shipping = () => {
   const cart = useSelector((state) => state.cart);
   const { shippingAddress } = cart;
   const dispatch = useDispatch();
@@ -20,7 +20,7 @@ const Login = () => {
   const submitHandler = (e) => {
     e.preventDefault();
     dispatch(saveShippingAddress({ address, city, postalCode, country }));
-    navigate("/payement");
+    navigate("/payment");
   };
   return (
     <>
@@ -80,4 +80,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Shipping;
