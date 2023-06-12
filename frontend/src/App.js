@@ -2,10 +2,13 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import { Container } from "react-bootstrap";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import HomeScreen from "./screens/HomeScreen";
-import ProductScreen from "./screens/ProductScreen";
+import Home from "./screens/Home";
+import SingleProduct from "./screens/SingleProduct";
 import Cart from "./screens/Cart";
-import Signin from "./screens/Signin";
+import Login from "./screens/Login";
+import Register from "./screens/Register";
+import Profile from "./screens/Profile";
+import Shipping from "./screens/Shipping";
 function App() {
   return (
     <>
@@ -14,10 +17,13 @@ function App() {
         <main className="py-3">
           <Container>
             <Routes>
-              <Route path="/" element={<HomeScreen />} exact />
-              <Route path="/product/:id" element={<ProductScreen />} />
-              <Route path="/cart" element={<Cart />} exact />
-              <Route path="/signin" element={<Signin />} exact />
+              <Route path="/" element={<Home />} exact />
+              <Route path="/product/:id" element={<SingleProduct />} />
+              <Route path="/cart/:id?" element={<Cart />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/register/?" element={<Register />} />
+              <Route path="/profile/" element={<Profile />} />
+              <Route path="/shipping/" element={<Shipping />} />
             </Routes>
           </Container>
         </main>

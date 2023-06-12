@@ -1,0 +1,14 @@
+.borderlessGroupItem{
+    border: none;
+}
+
+.cartBadge{
+    position: relative;
+    top: -7px;
+    border-radius: 50%;
+  }
+
+.dropdown-item.active, .dropdown-item:active{
+    background-color: #fff;
+    color: black;
+}
