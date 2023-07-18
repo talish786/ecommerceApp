@@ -38,6 +38,13 @@ const getOrderById = asyncHandler(async (req, res) => {
     "user",
     "name email"
   );
+
+  if (order) {
+    res.json(order);
+  } else {
+    res.status(404);
+    throw new Error("Order Not Found");
+  }
 });
 
-export { addOrderItems };
+export { addOrderItems, getOrderById };
