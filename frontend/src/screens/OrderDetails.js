@@ -1,19 +1,23 @@
 import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import { getOrder, payOrder } from "../actions/orderactions";
+import Loader from "../components/Loader";
+import { ORDER_PAY_RESET } from "../constants/orderConstants";
 import PageTitle from "../components/PageTitle";
 import { Row, Col, ListGroup, Image, Card } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
 import Message from "../components/Message";
 import { Link } from "react-router-dom";
-import { getOrder } from "../actions/orderactions";
-import { useParams } from "react-router-dom";
-import Loader from "../components/Loader";
+import PayPalButtonWrapper from "./PayPalButtonWrapper";
 const OrderDetails = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
 
   const orderDetails = useSelector((state) => state.orderDetails);
-  console.log(orderDetails);
   const { order, loading, error, success } = orderDetails;
+
+  const orderPay = useSelector((state) => state.orderPay);
+  const { loading: loadingPay, success: successPay } = orderPay;
 
   if (!loading) {
     order.itemsPrice = Math.round(
@@ -22,8 +26,16 @@ const OrderDetails = () => {
   }
 
   useEffect(() => {
-    dispatch(getOrder(id));
-  }, [dispatch, id]);
+    if (!order || successPay) {
+      dispatch({ type: ORDER_PAY_RESET });
+      dispatch(getOrder(id));
+    }
+  }, [dispatch, order, id, successPay]);
+
+  const successPaymentHandler = (paymentResult) => {
+    console.log(paymentResult);
+    dispatch(payOrder(id, paymentResult));
+  };
 
   return (
     <>
@@ -64,7 +76,7 @@ const OrderDetails = () => {
                   <strong>Method:</strong>
                   {order.paymentMethod}
                 </p>
-                {order.isPiad ? (
+                {order.isPaid ? (
                   <Message variant="success">Paid on {order.paidAt}</Message>
                 ) : (
                   <Message variant="danger">Not Paid</Message>
@@ -135,6 +147,15 @@ const OrderDetails = () => {
                     <Col>${Math.round(order.totalPrice)}</Col>
                   </Row>
                 </ListGroup.Item>
+                {!order.isPaid && (
+                  <ListGroup.Item>
+                    {loadingPay && <Loader />}
+                    <PayPalButtonWrapper
+                      amount={order.totalPrice}
+                      onSuccess={successPaymentHandler}
+                    />
+                  </ListGroup.Item>
+                )}
               </ListGroup>
             </Card>
           </Col>
