@@ -16,7 +16,7 @@ const Home = () => {
   const { loading, error, products } = productList;
   return (
     <>
-      <PageTitle title="Wacom" />
+      <PageTitle title="Chowkbazaar" />
       <h1>Latest Products</h1>
       {loading ? (
         <Loader />

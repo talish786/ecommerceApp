@@ -41,7 +41,7 @@ const Login = () => {
   };
   return (
     <>
-      <PageTitle title="Login - Wacom" />
+      <PageTitle title="Login - Chowkbazaar" />
       <h1>Sign In</h1>
       {loading && <Loader />}
       <FormContainer>

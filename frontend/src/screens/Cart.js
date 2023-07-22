@@ -29,7 +29,7 @@ const Cart = () => {
   };
   return (
     <>
-      <PageTitle title="Cart - Wacom" />
+      <PageTitle title="Cart - Chowkbazaar" />
       <Container>
         <h3>Shopping Cart</h3>
         {cartItems.length === 0 ? (

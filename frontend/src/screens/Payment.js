@@ -27,7 +27,7 @@ const Payment = () => {
   };
   return (
     <>
-      <PageTitle title="Payment - Wacom" />
+      <PageTitle title="Payment - Chowkbazaar" />
       <CheckoutSteps step1 step2 step3 />
       <h1>Shipping</h1>
       <FormContainer>

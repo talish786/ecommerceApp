@@ -24,7 +24,7 @@ const Shipping = () => {
   };
   return (
     <>
-      <PageTitle title="Shipping - Wacom" />
+      <PageTitle title="Shipping - Chowkbazaar" />
       <CheckoutSteps step1 step2 />
       <h1>Shipping</h1>
       <FormContainer>

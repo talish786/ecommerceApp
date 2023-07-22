@@ -46,7 +46,7 @@ const SingleProduct = () => {
 
   return (
     <>
-      <PageTitle title={`Product Page - Wacom`} />
+      <PageTitle title={`Product Page - Chowkbazaar`} />
       <Link className="btn btn-dark my-3" to="/">
         Go Back
       </Link>

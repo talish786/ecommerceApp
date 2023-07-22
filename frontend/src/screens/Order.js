@@ -31,6 +31,7 @@ const Order = () => {
     if (success) {
       navigate(`/order/${order._id}`);
     }
+    // eslint-disable-next-line
   }, [navigate, success]);
   const placeOrderHandler = () => {
     console.log("placeOrderHandler");
@@ -48,7 +49,7 @@ const Order = () => {
   };
   return (
     <>
-      <PageTitle title="Order - Wacom" />
+      <PageTitle title="Order - Chowkbazaar" />
       <CheckoutSteps step1 step2 step3 step4 />
       <Row>
         <Col md={8}>

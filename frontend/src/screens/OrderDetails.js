@@ -39,7 +39,7 @@ const OrderDetails = () => {
 
   return (
     <>
-      <PageTitle title="Order Details - Wacom" />
+      <PageTitle title="Order Details - Chowkbazaar" />
       {loading && <Loader />}
       {error && <Message variant="danger">{error}</Message>}
       {success && (

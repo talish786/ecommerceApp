@@ -22,7 +22,7 @@ const Header = () => {
       <Navbar bg="dark" variant="dark" expand="lg" collapseOnSelect>
         <Container>
           <LinkContainer to="/">
-            <Navbar.Brand className="text-white">Wacom</Navbar.Brand>
+            <Navbar.Brand className="text-white">Chowkbazaar</Navbar.Brand>
           </LinkContainer>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
@@ -60,6 +60,20 @@ const Header = () => {
                     Sign In
                   </Nav.Link>
                 </LinkContainer>
+              )}
+
+              {userInfo && userInfo.isAdmin && (
+                <NavDropdown title="Admin" id="adminmenu">
+                  <LinkContainer to="/admin/users">
+                    <NavDropdown.Item>Users</NavDropdown.Item>
+                  </LinkContainer>
+                  <LinkContainer to="/admin/products">
+                    <NavDropdown.Item>Products</NavDropdown.Item>
+                  </LinkContainer>
+                  <LinkContainer to="/admin/orders">
+                    <NavDropdown.Item>Orders</NavDropdown.Item>
+                  </LinkContainer>
+                </NavDropdown>
               )}
             </Nav>
           </Navbar.Collapse>

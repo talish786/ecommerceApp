@@ -65,7 +65,7 @@ const Profile = () => {
   };
   return (
     <>
-      <PageTitle title="Profile - Wacom" />
+      <PageTitle title="Profile - Chowkbazaar" />
       <h1>Profile</h1>
       {loading && <Loader />}
       <Row>

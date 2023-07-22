@@ -50,7 +50,7 @@ const Register = () => {
   };
   return (
     <>
-      <PageTitle title="Register - Wacom" />
+      <PageTitle title="Register - Chowkbazaar" />
       <h1>Register</h1>
       {loading && <Loader />}
       <FormContainer>

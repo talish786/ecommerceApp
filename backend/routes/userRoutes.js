@@ -7,10 +7,11 @@ import {
   getUserProfile,
   registerUser,
   updateUserProfile,
+  getUsers,
 } from "../controllers/userController.js";
 
-import { protect } from "../middlewares/authMiddleware.js";
-
+import { protect, admin } from "../middlewares/authMiddleware.js";
+router.get("/", protect, admin, getUsers);
 router.post("/login", userLogin);
 
 router
