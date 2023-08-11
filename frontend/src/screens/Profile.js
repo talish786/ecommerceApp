@@ -27,7 +27,7 @@ const Profile = () => {
   const { success } = userUpdateProfile;
 
   const myorders = useSelector((state) => state.myorders);
-  const { loading: loadingOrders, error: errorOrders, orders } = myorders;
+  const { error: errorOrders, orders } = myorders;
 
   useEffect(() => {
     if (!userInfo) {
@@ -123,9 +123,7 @@ const Profile = () => {
         </Col>
         <Col xs={12} md={9}>
           <h2>My Orders</h2>
-          {loadingOrders ? (
-            <Loader />
-          ) : errorOrders ? (
+          {errorOrders ? (
             <Message>{errorOrders}</Message>
           ) : (
             <Table

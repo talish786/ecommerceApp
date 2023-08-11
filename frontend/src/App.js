@@ -13,6 +13,7 @@ import Payment from "./screens/Payment";
 import Order from "./screens/Order";
 import OrderDetails from "./screens/OrderDetails";
 import AdminUsers from "./screens/Admin/Users";
+import EditUser from "./screens/Admin/EditUser";
 function App() {
   return (
     <>
@@ -32,6 +33,7 @@ function App() {
               <Route path="/order/" element={<Order />} />
               <Route path="/order/:id" element={<OrderDetails />} />
               <Route path="/admin/users" element={<AdminUsers />} />
+              <Route path="/admin/user/:id/edit" element={<EditUser />} />
             </Routes>
           </Container>
         </main>

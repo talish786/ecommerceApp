@@ -6,18 +6,31 @@ import { Row, Table, Button } from "react-bootstrap";
 import Message from "../../components/Message";
 import { getUsers } from "../../actions/userActions";
 import { LinkContainer } from "react-router-bootstrap";
+import { useNavigate } from "react-router-dom";
+import { deleteUser } from "../../actions/userActions";
 const Users = () => {
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
   const allUsers = useSelector((state) => state.users);
-
   const { loading, error, users } = allUsers;
 
-  useEffect(() => {
-    dispatch(getUsers());
-  }, [dispatch]);
+  const adminUser = useSelector((state) => state.userLogin);
+  const { userInfo } = adminUser;
 
-  const deleteUserHandler = (id) => {};
+  const userDelete = useSelector((state) => state.userDelete);
+  const { success: successDelete } = userDelete;
+
+  useEffect(() => {
+    if (userInfo && userInfo.isAdmin) {
+      dispatch(getUsers());
+    } else {
+      navigate("/");
+    }
+  }, [dispatch, userInfo, navigate, successDelete]);
+
+  const deleteUserHandler = (id) => {
+    dispatch(deleteUser(id));
+  };
   return (
     <>
       <PageTitle title="Admin Users - Chowkbazaar" />
@@ -54,7 +67,7 @@ const Users = () => {
                     <td>
                       {user.isAdmin ? (
                         <i
-                          class="fa-sharp fa-solid fa-check"
+                          className="fa-sharp fa-solid fa-check"
                           style={{ color: "#008000" }}
                         ></i>
                       ) : (
@@ -65,7 +78,7 @@ const Users = () => {
                       )}
                     </td>
                     <td>
-                      <LinkContainer to={`/user/${user._id}`}>
+                      <LinkContainer to={`/admin/user/${user._id}/edit`}>
                         <Button className="btn-sm" variant="light">
                           <i className="fas fa-edit"></i>
                         </Button>
