@@ -5,21 +5,39 @@ import FormContainer from "../../components/FormContainer";
 import Loader from "../../components/Loader";
 import Message from "../../components/Message";
 import { Link } from "react-router-dom";
-import { getUserDetails } from "../../actions/userActions";
+import { getUserData, userUpdate } from "../../actions/userActions";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
+import { USER_UPDATE_RESET } from "../../constants/userConstants";
 const EditUser = () => {
   const { id: userId } = useParams();
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const userDetails = useSelector((state) => state.userDetails);
+  const userDetails = useSelector((state) => state.getUserData);
   const { loading, error, user } = userDetails;
+
+  const userUpdateData = useSelector((state) => state.userUpdate);
+  const { loading: loadingUpdate, errorUpdate, successUpdate } = userUpdateData;
+
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [isAdmin, setAdmin] = useState("");
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    if (successUpdate) {
+      dispatch({ type: USER_UPDATE_RESET });
+      navigate("/admin/users");
+    } else {
+      if (!user.name || user._id !== userId) {
+        dispatch(getUserData(userId));
+      } else {
+        setName(user.name);
+        setEmail(user.email);
+        setAdmin(user.isAdmin);
+      }
+    }
+  }, [dispatch, navigate, userId, user, successUpdate]);
   const handleNameChange = (e) => {
     setName(e.target.value);
   };
@@ -28,17 +46,24 @@ const EditUser = () => {
   };
 
   const handleAdminChange = (e) => {
-    setAdmin(e.target.value);
+    setAdmin(e.target.checked);
   };
 
   const submitHandler = (e) => {
     e.preventDefault();
+    dispatch(userUpdate({ id: user._id, name, email, isAdmin }));
+    navigate("/admin/users");
   };
   return (
     <>
       <PageTitle title="Edit User - Chowkbazaar" />
-      <h1>Edit User</h1>
+      <Link to="/admin/users" className="btn btn-light my-3">
+        Go Back
+      </Link>
+      {loadingUpdate && <Loader />}
+      {errorUpdate && <Message variant="danger">{errorUpdate}</Message>}
       <FormContainer>
+        <h1>Edit User</h1>
         {loading ? (
           <Loader />
         ) : error ? (
@@ -62,6 +87,15 @@ const EditUser = () => {
                 name="email"
                 value={email}
                 onChange={handleEmailChange}
+                className="form-control"
+              />
+            </Form.Group>
+            <Form.Group controlId="isAdmin">
+              <Form.Check
+                type="checkbox"
+                label="Is Admin"
+                checked={isAdmin}
+                onChange={handleAdminChange}
                 className="form-control"
               />
             </Form.Group>

@@ -33,7 +33,6 @@ const OrderDetails = () => {
   }, [dispatch, order, id, successPay]);
 
   const successPaymentHandler = (paymentResult) => {
-    console.log(paymentResult);
     dispatch(payOrder(id, paymentResult));
   };
 
